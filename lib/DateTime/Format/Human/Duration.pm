@@ -17,7 +17,13 @@ sub format_duration_between {
     my $dur = $dt - $dtb;
 
     if (!exists $args{'locale'}) {
-        $args{'locale'} = $dt->{'locale'}{'id'};
+        my $locale_obj = $dt->locale;
+        if (UNIVERSAL::can($locale_obj, 'code')) {
+            $args{'locale'} = $locale_obj->code; # DateTime::Locale v1
+        }
+        else {
+            $args{'locale'} = $locale_obj->id;   # DateTime::Locale v0
+        }
     }
     
     return $span->format_duration($dur, %args);    

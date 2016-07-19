@@ -61,7 +61,7 @@ SKIP: {
     # test 'locale' key
     is( $span->format_duration($dure, 'locale' => 'fr'), '1 minute et 3 seconds', 'locale key as string format_duration()');
     is( $span->format_duration($dure, 'locale' => $dub), '1 minute et 3 seconds', 'locale key as $DateTime obj format_duration()');
-    is( $span->format_duration($dure, 'locale' => $dub->{'locale'}), '1 minute et 3 seconds', 'locale key as $DateTime->{\'locale\'} format_duration()');
+    is( $span->format_duration($dure, 'locale' => $dub->locale), '1 minute et 3 seconds', 'locale key as $DateTime->{\'locale\'} format_duration()');
     is( $span->format_duration_between($dub, $duc), '1 minute et 1 seconde', 'Object\'s locale used in format_duration_between()');
 
     # test 'significant_units'
