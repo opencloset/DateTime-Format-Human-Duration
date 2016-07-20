@@ -1,4 +1,4 @@
-package DateTime::Format::Human::Duration::Locale;
+package OpenCloset::Patch::DateTime::Format::Human::Duration::Locale;
 
 # require DateTime::Format::Locale;
 
@@ -12,13 +12,13 @@ sub calc_locale {
     my $final = determine_locale_from({
         'base_object'     => $span,
         'get_locale_from' => $loc,  
-        'locale_ns_path'  => 'DateTime/Format/Human/Duration/Locale',  # DateTime::Format::Human::Duration::Locale
+        'locale_ns_path'  => 'OpenCloset/Patch/DateTime/Format/Human/Duration/Locale',  # OpenCloset::Patch::DateTime::Format::Human::Duration::Locale
     });
 
     if ($final) {  
         return $final if ref $final; # returned 'locale_cache' we created below
              
-        my $ns = "DateTime::Format::Human::Duration::Locale::$final";
+        my $ns = "OpenCloset::Patch::DateTime::Format::Human::Duration::Locale::$final";
         # get_human_span_from_units_array has been deprecated, but we'll
         # still support it.
         if ( $ns->can('get_human_span_from_units_array') ) {
@@ -48,12 +48,28 @@ sub determine_locale_from {
     if (ref $args_hr->{'get_locale_from'}) {
         my $ns = ref($args_hr->{'get_locale_from'});
 
-        if (exists $args_hr->{'get_locale_from'}{'locale'}) {
-            $ns = exists $args_hr->{'get_locale_from'}{'locale'}{'id'} ? $args_hr->{'get_locale_from'}{'locale'}{'id'} : ref($args_hr->{'get_locale_from'}{'locale'});
+        if (UNIVERSAL::can( $args_hr->{'get_locale_from'}, 'locale' )) {
+            my $locale_obj = $args_hr->{'get_locale_from'}->locale;
+            if (UNIVERSAL::can($locale_obj, 'code')) {
+                $ns = $locale_obj->code; # DateTime::Locale v1
+            }
+            elsif (UNIVERSAL::can($locale_obj, 'id')) {
+                $ns = $locale_obj->id;   # DateTime::Locale v0
+            }
+            else {
+                $ns = ref($args_hr->{'get_locale_from'}{'locale'});
+            }
         }
-        elsif ($ns =~ m{^DateTime::Locale::} && exists $args_hr->{'get_locale_from'}{'id'}) {
-            $ns = $args_hr->{'get_locale_from'}{'id'};
+        elsif ($ns =~ m{^DateTime::Locale::}) {
+            my $locale_obj = $args_hr->{'get_locale_from'};
+            if (UNIVERSAL::can($locale_obj, 'code')) {
+                $ns = $locale_obj->code; # DateTime::Locale v1
+            }
+            else {
+                $ns = $locale_obj->id;   # DateTime::Locale v0
+            }
         }
+
         ($args_hr->{'get_locale_from'}) = reverse split /::/, $ns;
     }
     
@@ -91,3 +107,7 @@ sub determine_locale_from {
 }
 
 1;
+
+# ABSTRACT: ...
+
+=for Pod::Coverage calc_locale determine_locale_from

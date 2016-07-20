@@ -1,4 +1,4 @@
-package DateTime::Format::Human::Duration::Locale::ko;
+package OpenCloset::Patch::DateTime::Format::Human::Duration::Locale::ko;
 
 use utf8;
 use strict;
@@ -29,3 +29,7 @@ sub get_human_span_hashref {
 }
 
 1;
+
+# ABSTRACT: ...
+
+=for Pod::Coverage get_human_span_hashref get_human_span_from_units
