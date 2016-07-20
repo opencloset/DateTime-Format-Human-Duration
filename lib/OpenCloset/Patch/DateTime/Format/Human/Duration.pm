@@ -4,7 +4,7 @@ use warnings;
 use strict;
 require OpenCloset::Patch::DateTime::Format::Human::Duration::Locale;
 
-our $VERSION = 'v0.62.1';
+our $VERSION = 'v0.62.2';
 
 use Carp qw/croak/;
 

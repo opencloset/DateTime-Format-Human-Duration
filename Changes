@@ -1,6 +1,8 @@
 Revision history for OpenCloset-Patch-DateTime-Format-Human-Duration
 
 {{ $NEXT }}
+
+v0.62.1   2016-07-20 17:45:17+09:00 Asia/Seoul
        * Patch for OpenCloset
 
 0.62   Thu Feb  5 03:45:30 CST 2015
