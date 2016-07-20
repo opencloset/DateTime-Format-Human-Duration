@@ -1,4 +1,4 @@
-package DateTime::Format::Human::Duration::Locale::de;
+package OpenCloset::Patch::DateTime::Format::Human::Duration::Locale::de;
 
 use strict;
 use warnings;
@@ -28,3 +28,7 @@ sub get_human_span_hashref {
 }
 
 1;
+
+# ABSTRACT: ...
+
+=for Pod::Coverage get_human_span_hashref get_human_span_from_units

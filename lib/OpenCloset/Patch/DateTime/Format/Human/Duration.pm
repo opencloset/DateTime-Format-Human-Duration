@@ -1,15 +1,15 @@
-package DateTime::Format::Human::Duration;
+package OpenCloset::Patch::DateTime::Format::Human::Duration;
 
 use warnings;
 use strict;
-require DateTime::Format::Human::Duration::Locale;
+require OpenCloset::Patch::DateTime::Format::Human::Duration::Locale;
 
-our $VERSION = '0.62';
+our $VERSION = 'v0.62.1';
 
 use Carp qw/croak/;
 
 sub new {
-    bless { 'locale_cache' => {} }, 'DateTime::Format::Human::Duration';  
+    bless { 'locale_cache' => {} }, 'OpenCloset::Patch::DateTime::Format::Human::Duration';  
 }
 
 sub format_duration_between {
@@ -66,7 +66,7 @@ sub format_duration {
     }
     
     ####
-    ## this is essentially the hashref that is returned from DateTime::Format::Human::Duration::en::get_human_span_hashref() : #
+    ## this is essentially the hashref that is returned from OpenCloset::Patch::DateTime::Format::Human::Duration::en::get_human_span_hashref() : #
     ####
     my $setup = {
         'no_oxford_comma' => 0,
@@ -90,7 +90,7 @@ sub format_duration {
         'nanoseconds' => 'nanoseconds',        
     };
 
-    my $locale = DateTime::Format::Human::Duration::Locale::calc_locale($span, $args{'locale'});
+    my $locale = OpenCloset::Patch::DateTime::Format::Human::Duration::Locale::calc_locale($span, $args{'locale'});
  
     if($locale) {
         if ( ref $locale eq 'HASH' ) {
@@ -153,14 +153,14 @@ __END__
 
 =head1 NAME
 
-DateTime::Format::Human::Duration - Get a locale specific string describing the span of a given duration
+OpenCloset::Patch::DateTime::Format::Human::Duration - Get a locale specific string describing the span of a given duration
 
 =head1 SYNOPSIS
 
     use DateTime;
-    use DateTime::Format::Human::Duration
+    use OpenCloset::Patch::DateTime::Format::Human::Duration
 
-    my $span = DateTime::Format::Human::Duration->new();
+    my $span = OpenCloset::Patch::DateTime::Format::Human::Duration->new();
     my $dur = $dta - $dtb;
     print $span->format_duration($dur); # 1 year, 2 months, 3 minutes, and 1 second
   
@@ -257,7 +257,7 @@ Specify units to format duration with. Arguments will be passed to DateTime::For
 
 Example:
 
-    my $fmt = DateTime::Format::Human::Duration->new();
+    my $fmt = OpenCloset::Patch::DateTime::Format::Human::Duration->new();
     my $d = DateTime::Duration->new(...);
   
     my $s = $fmt->format_duration($d, 'units' => [qw/years months days/] );
@@ -272,7 +272,7 @@ By default, the duration will be formatted using nanosecond resolution. Resoluti
 
 Example:
 
-    my $fmt = DateTime::Format::Human::Duration->new();
+    my $fmt = OpenCloset::Patch::DateTime::Format::Human::Duration->new();
     my $d = DateTime::Duration->new(...);
   
     print $fmt->format_duration($d);
@@ -287,7 +287,7 @@ By default, the duration will be formatted using all specified units.  To restri
 
 Example:
 
-    my $fmt = DateTime::Format::Human::Duration->new();
+    my $fmt = OpenCloset::Patch::DateTime::Format::Human::Duration->new();
     my $d = DateTime::Duration->new(...);
   
     print $fmt->format_duration($d, 'significant_units' => 1);
@@ -303,16 +303,16 @@ Example:
 
 =head1 LOCALIZATION
 
-Localization is provided by the included DateTime::Format::Human::Duration::Locale modules.
+Localization is provided by the included OpenCloset::Patch::DateTime::Format::Human::Duration::Locale modules.
 
-Included are DateTime::Format::Human::Duration::Locale::es, DateTime::Format::Human::Duration::Locale::fr, DateTime::Format::Human::Duration::Locale::pt,
-DateTime::Format::Human::Duration::Locale::de, DateTime::Format::Human::Duration::Locale::it
+Included are OpenCloset::Patch::DateTime::Format::Human::Duration::Locale::es, OpenCloset::Patch::DateTime::Format::Human::Duration::Locale::fr, OpenCloset::Patch::DateTime::Format::Human::Duration::Locale::pt,
+OpenCloset::Patch::DateTime::Format::Human::Duration::Locale::de, OpenCloset::Patch::DateTime::Format::Human::Duration::Locale::it
 
 More will be included as time permits/folks volunteer/CLDR becomes an option
 
 They are setup this way:
 
-DateTime::Format::Human::Duration::Locale::XYZ where 'XYZ' is the ISO code of DateTime::Locale
+OpenCloset::Patch::DateTime::Format::Human::Duration::Locale::XYZ where 'XYZ' is the ISO code of DateTime::Locale
 
 It can have one of 2 functions:
 
@@ -358,7 +358,7 @@ This function receives a hashref of duration values, and a hashref of the L</sta
         return $string; # 1 year, 2days, 4 hours, and 17 minutes
     }
 
-Please see the example in C<t/lib/DateTime/Format/Human/Duration/Locale/nb.pm>.
+Please see the example in C<t/lib/OpenCloset/Patch/DateTime/Format/Human/Duration/Locale/nb.pm>.
 
 =back
 
@@ -417,7 +417,7 @@ Note L</format_duration_between>(), does not suffer from this since we're using 
 
 We want to use the so-called Oxford comma to avoid ambiguity.
 
-=head2 My DateTime::Format::Human::Duration::Locale::XX still outputs in English!
+=head2 My OpenCloset::Patch::DateTime::Format::Human::Duration::Locale::XX still outputs in English!
 
 That is because it defined neither the L</get_human_span_hashref()> or the L</get_human_span_from_units()> functions
 
@@ -427,7 +427,7 @@ It must define one of them or defaults are used.
 
 Essencially DateTime::Format::Duration is an object representing a single strftime() type string to apply to any given duration. This is not flexible enough for the intent of this module.
 
-DateTime::Format::Duration is not a bad module its just for a different purpose than DateTime::Format::Human::Duration
+DateTime::Format::Duration is not a bad module its just for a different purpose than OpenCloset::Patch::DateTime::Format::Human::Duration
 
 =over 4
 
@@ -451,7 +451,7 @@ Plus since it all depends on the locale it is in it'd be difficult.
 
 =back
 
-The purpose of DateTime::Format::Human::Duration was to generate a localized human language description of a duration without the caller needing to supply any logic.
+The purpose of OpenCloset::Patch::DateTime::Format::Human::Duration was to generate a localized human language description of a duration without the caller needing to supply any logic.
 
 =head1 DIAGNOSTICS
 
@@ -459,7 +459,7 @@ Throws no warnings or errors of its own
 
 =head1 CONFIGURATION AND ENVIRONMENT
 
-DateTime::Format::Human::Duration requires no configuration files or environment variables.
+OpenCloset::Patch::DateTime::Format::Human::Duration requires no configuration files or environment variables.
 
 =head1 DEPENDENCIES
 

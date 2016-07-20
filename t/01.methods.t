@@ -2,10 +2,10 @@ use Test::More;
 use lib '../lib';
 
 BEGIN {
-    use_ok( 'DateTime::Format::Human::Duration' );
+    use_ok( 'OpenCloset::Patch::DateTime::Format::Human::Duration' );
 }
 
-diag( "Testing DateTime::Format::Human::Duration $DateTime::Format::Human::Duration::VERSION" );
+diag( "Testing OpenCloset::Patch::DateTime::Format::Human::Duration $OpenCloset::Patch::DateTime::Format::Human::Duration::VERSION" );
 
 SKIP: {
     eval 'use DateTime';
@@ -29,8 +29,8 @@ SKIP: {
     my $durg = $dua - $due;
 
    #    Start testing
-   my $span = DateTime::Format::Human::Duration->new();
-    isa_ok($span, 'DateTime::Format::Human::Duration');
+   my $span = OpenCloset::Patch::DateTime::Format::Human::Duration->new();
+    isa_ok($span, 'OpenCloset::Patch::DateTime::Format::Human::Duration');
 
     is( $span->format_duration($dura), 'no time', 'No difference w/ default no_time');
     is( $span->format_duration($dura,  'no_time' => 'absolutely no time' ), 'absolutely no time', 'No difference w/ no_time');
