@@ -1,12 +1,12 @@
 use Test::More;
 use lib 't/lib';
-use DateTime::Format::Human::Duration;
+use OpenCloset::Patch::DateTime::Format::Human::Duration;
 use FindBin qw($Bin);
 use File::Spec;
 BEGIN { push @INC, File::Spec->catfile($Bin, 'lib'); }
 
 
-my $fmt = DateTime::Format::Human::Duration->new;
+my $fmt = OpenCloset::Patch::DateTime::Format::Human::Duration->new;
 
 SKIP: {
     eval 'use DateTime';

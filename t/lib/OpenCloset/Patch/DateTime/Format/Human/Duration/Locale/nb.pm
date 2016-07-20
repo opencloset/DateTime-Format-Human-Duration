@@ -1,4 +1,4 @@
-package DateTime::Format::Human::Duration::Locale::nb;
+package OpenCloset::Patch::DateTime::Format::Human::Duration::Locale::nb;
 use strict;
 use warnings;
 
